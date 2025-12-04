@@ -4,12 +4,12 @@
 
 ## 功能
 
-- 🚀 一键创建 Power 骨架工程
-- � dev本/main 双分支工作流
-- � 自动化版本C管理（standard-version）
-- �  自动生成 CHANGELOG
-- 🤖 GitHub Actions 自动发布
-- 📋 Conventional Commits 规范
+- 一键创建 Power 骨架工程
+- dev/main 双分支工作流
+- 自动化版本管理（standard-version）
+- 自动生成 CHANGELOG
+- GitHub Actions 自动发布
+- Conventional Commits 规范
 
 ## 安装
 

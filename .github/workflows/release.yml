@@ -1,0 +1,52 @@
+name: Release to Main
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Get version from tag
+        id: version
+        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Checkout main branch
+        run: |
+          git checkout main
+          git pull origin main
+
+      - name: Copy release files to main
+        run: |
+          git checkout dev -- POWER.md README.md LICENSE steering/
+          git checkout dev -- mcp.json 2>/dev/null || true
+          
+      - name: Commit and push to main
+        run: |
+          git add .
+          git commit -m "release: v${{ steps.version.outputs.version }}" || echo "No changes to commit"
+          git tag -f v${{ steps.version.outputs.version }}
+          git push origin main
+          git push -f origin v${{ steps.version.outputs.version }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: Release v${{ steps.version.outputs.version }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

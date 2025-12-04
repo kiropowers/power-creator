@@ -1,13 +1,17 @@
 {
   "name": "power-creator",
   "version": "0.1.0",
-  "description": "快速创建 Kiro Power 骨架工程，自带版本管理和发布功能",
+  "description": "快速创建 Kiro Power 骨架工程，包含完整的开发环境和自动化发布流程",
   "scripts": {
-    "release": "standard-version",
-    "release:patch": "standard-version --release-as patch",
-    "release:minor": "standard-version --release-as minor",
-    "release:major": "standard-version --release-as major",
-    "release:first": "standard-version --first-release"
+    "release": "standard-version && git push --follow-tags origin dev",
+    "release:patch": "standard-version --release-as patch && git push --follow-tags origin dev",
+    "release:minor": "standard-version --release-as minor && git push --follow-tags origin dev",
+    "release:major": "standard-version --release-as major && git push --follow-tags origin dev",
+    "release:first": "standard-version --first-release && git push --follow-tags origin dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kiropowers/power-creator.git"
   },
   "devDependencies": {
     "standard-version": "^9.5.0"

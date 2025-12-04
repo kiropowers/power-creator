@@ -1,6 +1,6 @@
 {
   "name": "power-creator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "快速创建 Kiro Power 骨架工程，包含完整的开发环境和自动化发布流程",
   "scripts": {
     "release": "standard-version && git push --follow-tags origin dev",

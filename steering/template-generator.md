@@ -27,13 +27,14 @@ mkdir {{power-name}}/steering
 按以下顺序生成文件：
 
 1. `POWER.md` - Power 配置
-2. `package.json` - 版本管理
-3. `.versionrc.json` - CHANGELOG 配置
-4. `.gitignore` - Git 忽略规则
-5. `LICENSE` - MIT 许可证
-6. `CHANGELOG.md` - 变更日志
-7. `README.md` - 项目说明
-8. `steering/getting-started.md` - 入门指南
+2. `mcp.json` - MCP Server 配置（如需要）
+3. `package.json` - 版本管理
+4. `.versionrc.json` - CHANGELOG 配置
+5. `.gitignore` - Git 忽略规则
+6. `LICENSE` - MIT 许可证
+7. `CHANGELOG.md` - 变更日志
+8. `README.md` - 项目说明
+9. `steering/getting-started.md` - 入门指南
 
 ## 文件模板
 
@@ -116,6 +117,30 @@ keywords:
     { "type": "chore", "section": "🔧 构建/工具" },
     { "type": "ci", "section": "👷 CI 配置" }
   ]
+}
+```
+
+### mcp.json（如需 MCP Server）
+
+```json
+{
+  "mcpServers": {
+    "{{server-name}}": {
+      "command": "uvx",
+      "args": ["{{package-name}}@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    }
+  }
+}
+```
+
+如果是纯 Steering Power（不需要 MCP 工具），可以使用空配置：
+
+```json
+{
+  "mcpServers": {}
 }
 ```
 

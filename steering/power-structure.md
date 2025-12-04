@@ -2,6 +2,56 @@
 
 本文件指导如何创建标准的 Kiro Power 骨架工程。
 
+## Power 类型
+
+### 类型 1：纯 Steering Power
+
+只提供文档和指导，不需要 MCP 工具：
+
+```
+my-power/
+├── POWER.md              # [必需] Power 配置和文档
+├── steering/             # [必需] Steering 指导文件
+│   └── getting-started.md
+├── README.md             # [推荐] 项目说明
+└── LICENSE               # [推荐] 许可证
+```
+
+适用场景：代码规范、最佳实践、工作流指导等。
+
+### 类型 2：带 MCP Server 的 Power
+
+提供工具调用能力：
+
+```
+my-power/
+├── POWER.md              # [必需] Power 配置和文档
+├── mcp.json              # [必需] MCP Server 配置
+├── steering/             # [推荐] Steering 指导文件
+│   └── getting-started.md
+├── README.md             # [推荐] 项目说明
+└── LICENSE               # [推荐] 许可证
+```
+
+适用场景：数据库操作、API 调用、文件处理等需要工具的场景。
+
+## 完整目录结构（带版本管理）
+
+```
+my-power/
+├── POWER.md              # [必需] Power 配置和文档
+├── mcp.json              # [可选] MCP Server 配置
+├── README.md             # [推荐] 项目说明
+├── LICENSE               # [推荐] 许可证
+├── package.json          # [推荐] 版本管理
+├── .versionrc.json       # [推荐] CHANGELOG 配置
+├── .gitignore            # [推荐] Git 忽略规则
+├── CHANGELOG.md          # [推荐] 变更日志
+└── steering/             # [推荐] Steering 指导文件
+    ├── getting-started.md
+    └── ...
+```
+
 ## 必需文件
 
 ### POWER.md
@@ -19,20 +69,20 @@ keywords:                    # 激活关键词
 ---
 ```
 
-### 目录结构
+### mcp.json（如需 MCP Server）
 
-```
-my-power/
-├── POWER.md              # [必需] Power 配置和文档
-├── README.md             # [必需] 项目说明
-├── LICENSE               # [推荐] 许可证
-├── package.json          # [推荐] 版本管理
-├── .versionrc.json       # [推荐] CHANGELOG 配置
-├── .gitignore            # [推荐] Git 忽略规则
-├── CHANGELOG.md          # [推荐] 变更日志
-└── steering/             # [推荐] Steering 指导文件
-    ├── getting-started.md
-    └── ...
+```json
+{
+  "mcpServers": {
+    "server-name": {
+      "command": "uvx",
+      "args": ["package-name@latest"],
+      "env": {
+        "ENV_VAR": "value"
+      }
+    }
+  }
+}
 ```
 
 ## POWER.md 模板

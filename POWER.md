@@ -1,7 +1,7 @@
 ---
 name: "power-creator"
 displayName: "Power 创建助手"
-description: "快速创建 Kiro Power 骨架工程，自带版本管理和发布功能"
+description: "快速创建 Kiro Power 骨架工程，包含完整的开发环境和自动化发布流程"
 keywords:
   - "power"
   - "创建"
@@ -10,135 +10,114 @@ keywords:
   - "骨架"
   - "模板"
   - "template"
-  - "版本"
-  - "version"
-  - "changelog"
-  - "发布"
-  - "release"
+  - "新建"
+  - "初始化"
+  - "init"
 ---
 
 # Power 创建助手
 
-帮助你快速创建 Kiro Power 骨架工程，包含完整的版本管理和发布功能。
+帮助你快速创建完整的 Kiro Power 开发骨架，包含：
+
+- 📁 标准目录结构
+- 🔄 dev/main 双分支工作流
+- 📦 自动化版本管理
+- 🚀 一键发布到 GitHub
 
 ## 何时激活
 
 当用户讨论以下内容时激活此 Power：
 
 - 创建新的 Power
+- 初始化 Power 项目
 - Power 项目结构
 - Power 模板/骨架
-- 版本号管理
-- CHANGELOG 生成
-- 发布流程
 
 ## Onboarding
 
-### 步骤 1：检查环境
-
-确保已安装 Node.js 和 pnpm：
-
-```bash
-node --version   # 需要 Node.js 14+
-pnpm --version   # 需要 pnpm
-```
-
-如果未安装 pnpm：
-
-```bash
-npm install -g pnpm
-```
-
-### 步骤 2：创建新 Power
-
-告诉 Kiro 你想创建的 Power 名称和功能，例如：
+### 步骤 1：告诉我你的 Power 信息
 
 ```
-创建一个名为 "my-awesome-power" 的 Power，用于 XXX 功能
+创建一个 Power：
+- 名称：my-awesome-power
+- 显示名称：我的超棒助手
+- 描述：帮助用户完成 XXX 功能
+- 关键词：keyword1, keyword2
+- 是否需要 MCP Server：是/否
 ```
 
-Kiro 会自动生成完整的骨架工程。
+### 步骤 2：我会生成完整骨架
 
-## Power 骨架结构
+包含以下文件：
 
 ```
-my-power/
-├── POWER.md              # Power 配置和文档
+my-awesome-power/
+├── POWER.md              # Power 配置
 ├── README.md             # 项目说明
 ├── LICENSE               # MIT 许可证
-├── package.json          # 版本管理配置
+├── package.json          # 版本管理
 ├── .versionrc.json       # CHANGELOG 配置
 ├── .gitignore            # Git 忽略规则
 ├── CHANGELOG.md          # 变更日志
-└── steering/             # Steering 指导文件
+├── mcp.json              # MCP 配置
+├── .github/
+│   └── workflows/
+│       └── release.yml   # 自动发布工作流
+└── steering/
     └── getting-started.md
+```
+
+### 步骤 3：初始化并发布
+
+```bash
+cd my-awesome-power
+pnpm install
+# 在 GitHub 创建仓库后
+git remote add origin https://github.com/your-org/my-awesome-power.git
+git push -u origin dev
+git push -u origin main
+pnpm release:first
 ```
 
 ## Steering 文件映射
 
 | 任务场景 | Steering 文件 | 说明 |
 | -------- | ------------- | ---- |
-| 创建 Power | `steering/power-structure.md` | Power 结构规范 |
-| 编写 POWER.md | `steering/power-config.md` | POWER.md 配置指南 |
-| 提交代码 | `steering/commit-convention.md` | Conventional Commits 规范 |
-| 发布版本 | `steering/version-release.md` | 版本发布工作流 |
+| 创建 Power | `steering/template-generator.md` | 完整骨架生成指南 |
+| Power 结构 | `steering/power-structure.md` | 目录结构规范 |
+| POWER.md 配置 | `steering/power-config.md` | 配置文件指南 |
+| 提交规范 | `steering/commit-convention.md` | Conventional Commits |
+| 版本发布 | `steering/version-release.md` | 发布工作流 |
 
-## 快速命令
+## 生成的工作流
 
+**分支结构：**
+- `dev` - 开发分支（完整开发环境）
+- `main` - 发布分支（只有 Power 必需文件）
+
+**发布流程：**
 ```bash
-# 安装依赖
-pnpm install
-
-# 发布新版本（自动判断）
-pnpm release
-
-# 指定版本类型
-pnpm release:patch   # 0.1.0 → 0.1.1
-pnpm release:minor   # 0.1.0 → 0.2.0
-pnpm release:major   # 0.1.0 → 1.0.0
-
-# 首次发布
-pnpm release:first
-
-# 预览（不实际发布）
-pnpm release -- --dry-run
+pnpm release        # 一键发布！
 ```
 
-## 创建 Power 示例
-
-### 基础 Power
-
-```
-创建一个 Power：
-- 名称：code-reviewer
-- 功能：代码审查助手
-- 关键词：review, 审查, code quality
-```
-
-### 带 MCP Server 的 Power
-
-```
-创建一个 Power：
-- 名称：database-helper
-- 功能：数据库操作助手
-- 需要 MCP Server 支持
-```
+自动执行：
+1. 更新版本号和 CHANGELOG
+2. 创建 Git tag
+3. 推送到 dev 分支
+4. GitHub Actions 自动同步到 main 分支
+5. 创建 GitHub Release
 
 ## 常见问题
 
-### Q: 如何发布到 GitHub？
+### Q: 如何选择版本类型？
 
 ```bash
-# 初始化 Git
-git init
-git add .
-git commit -m "feat: initial release"
-
-# 关联远程仓库
-git remote add origin https://github.com/your-org/your-power.git
-git push -u origin main
+pnpm release        # 自动判断（推荐）
+pnpm release:patch  # Bug 修复 0.1.0 → 0.1.1
+pnpm release:minor  # 新功能 0.1.0 → 0.2.0
+pnpm release:major  # 破坏性变更 0.1.0 → 1.0.0
 ```
 
-### Q: 如何让用户安装我的 Power？
+### Q: 用户如何安装我的 Power？
 
-用户可以通过 Kiro Powers 面板添加你的 GitHub 仓库地址。
+用户在 Kiro Powers 面板添加你的 GitHub 仓库地址即可。

@@ -1,0 +1,16 @@
+{
+  "name": "power-creator",
+  "version": "0.1.0",
+  "description": "快速创建 Kiro Power 骨架工程，自带版本管理和发布功能",
+  "scripts": {
+    "release": "standard-version",
+    "release:patch": "standard-version --release-as patch",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:first": "standard-version --first-release"
+  },
+  "devDependencies": {
+    "standard-version": "^9.5.0"
+  },
+  "license": "MIT"
+}

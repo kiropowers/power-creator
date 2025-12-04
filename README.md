@@ -1,74 +1,76 @@
 # Power Creator
 
-快速创建 Kiro Power 骨架工程的助手，包含完整的开发环境和自动化发布流程。
+[English](README.md) | [中文](README.zh-CN.md)
 
-## 功能
+A Kiro Power for scaffolding new Power projects with complete development environment and automated release workflow.
 
-- 一键创建 Power 骨架工程
-- dev/main 双分支工作流
-- 自动化版本管理（standard-version）
-- 自动生成 CHANGELOG
-- GitHub Actions 自动发布
-- Conventional Commits 规范
+## Features
 
-## 安装
+- One-click Power skeleton generation
+- dev/main dual-branch workflow
+- Automated versioning (standard-version)
+- Auto-generated CHANGELOG
+- GitHub Actions auto-release
+- Conventional Commits support
 
-在 Kiro 中通过 Powers 面板添加此仓库。
+## Installation
 
-## 使用
+Add this repository via Kiro Powers panel.
 
-激活 Power 后，告诉 Kiro 你想创建的 Power：
+## Usage
+
+After activating the Power, tell Kiro what Power you want to create:
 
 ```
-创建一个 Power：
-- 名称：my-power
-- 显示名称：我的助手
-- 描述：帮助用户完成 XXX
-- 关键词：keyword1, keyword2
+Create a Power:
+- Name: my-power
+- Display Name: My Awesome Power
+- Description: Helps users do XXX
+- Keywords: keyword1, keyword2
 ```
 
-## 生成的骨架结构
+## Generated Skeleton Structure
 
 ```
 my-power/
-├── POWER.md              # Power 配置
-├── README.md             # 项目说明
-├── LICENSE               # MIT 许可证
-├── package.json          # 版本管理
-├── .versionrc.json       # CHANGELOG 配置
-├── .gitignore            # Git 忽略规则
-├── CHANGELOG.md          # 变更日志
-├── mcp.json              # MCP 配置
+├── POWER.md              # Power configuration
+├── README.md             # Project description
+├── LICENSE               # MIT License
+├── package.json          # Version management
+├── .versionrc.json       # CHANGELOG config
+├── .gitignore            # Git ignore rules
+├── CHANGELOG.md          # Change log
+├── mcp.json              # MCP configuration
 ├── .github/
 │   └── workflows/
-│       └── release.yml   # 自动发布
+│       └── release.yml   # Auto release
 └── steering/
     └── getting-started.md
 ```
 
-## 开发
+## Development
 
 ```bash
-# 克隆仓库
+# Clone repository
 git clone https://github.com/kiropowers/power-creator.git
 cd power-creator
 git checkout dev
 pnpm install
 ```
 
-## 发布
+## Release
 
 ```bash
-pnpm release        # 自动判断版本号
-pnpm release:patch  # 补丁版本
-pnpm release:minor  # 次版本
-pnpm release:major  # 主版本
+pnpm release        # Auto determine version
+pnpm release:patch  # Patch version
+pnpm release:minor  # Minor version
+pnpm release:major  # Major version
 ```
 
-## 分支说明
+## Branch Description
 
-- `dev` - 开发分支，包含完整开发环境
-- `main` - 发布分支，只包含 Power 必需文件
+- `dev` - Development branch with full dev environment
+- `main` - Release branch with only Power essential files
 
 ## License
 
